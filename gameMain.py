@@ -1,16 +1,16 @@
+# This is a test file to test that the AI works properly. It lets a human play against the AI.
+# Not part of end product
 from GameEngine import GameState, Move
 from gameAI import findBestMove, findRandomMove
 
 
 # Print the board to help visualise
-# Not part of end product
 def drawBoard(board):
     # Function that prints out the current boardstate
     for row in board:
         print('{}'.format(row))
 
 # Main to test that everything works, includes a way for a human to play against the  AI
-# Not part of end product
 def main():
     # Create an object of the class GameState
     gs = GameState()
