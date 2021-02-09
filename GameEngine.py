@@ -4,6 +4,9 @@ class GameState():
         # Board is a 19*19 2D list each elemet has 2 characters.
         # The first character represent color "b" or "w".
         # The second character represent the type of pice "K" or "p".
+        
+        # This board is to test that everything works
+        # Not part of end product
         self.board = [
             ["wp","wp","--","--","--","--","--","--","--","--","--","--","--","--","--","--","--","--","--"],
             ["wK","bp","--","--","--","--","--","--","--","--","--","--","--","--","--","--","--","--","--"],
@@ -25,12 +28,15 @@ class GameState():
             ["--","--","--","--","--","--","--","--","--","--","--","--","--","--","--","--","--","--","--"],
             ["--","--","--","--","--","--","--","--","--","--","--","--","--","--","--","--","--","--","--"],
         ]
+        
+        # Properties of the board
         self.moveFunctions = {'p': self.getPawnMoves, 'K': self.getKingMoves}
         self.movelog = []
         self.whiteToMove = True
         self.win = False
 
-
+        
+    # Moves a piece, records the movement in the movelog, upadates turn order, and checks if the player wins.
     def makeMove(self,move):
         # Takes a move object as input and excecutes it on the baord of the gamestate
         corners = [(0, 0), (0, 1), (1, 0), (1, 1), (0, 17), (0, 18), (1, 17), (1, 18), (17, 0), (17, 1), (18, 0),
@@ -47,6 +53,7 @@ class GameState():
         if (move.pieceMoved[1] == 'K') and ((move.endRow,move.endCol) in corners):
             self.win = True
 
+    # 
     def updateCapture(self,row,col,move):
         directions = ((-1, 0), (0, -1), (1, 0), (0, 1))  # directions up, left, down, right
         corners = [(0,0),(0,1),(1,0),(1,1),(0,17),(0,18),(1,17),(1,18),(17,0),(17,1),(18,0),(18,1),(17,17),(17,18),(18,17),(18,18)]
@@ -108,8 +115,7 @@ class GameState():
                 self.win = True
 
 
-
-
+    # Reverse the last move in the movelog
     def undoMove(self):
         if len(self.movelog) != 0:
             move = self.movelog.pop()
@@ -121,7 +127,8 @@ class GameState():
                 self.board[move.pieceCaptured_cord[0]][move.pieceCaptured_cord[1]] = move.pieceCaptured
 
             self.win = False
-
+    
+    #
     def getAllPossibleMoves(self):
         moves = []
         for row in range(len(self.board)):
@@ -167,7 +174,7 @@ class GameState():
                     break
 
 
-
+# Class used to define movment
 class Move():
     def __init__(self,startSq,endSq,board):
 
