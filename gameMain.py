@@ -2,27 +2,33 @@ from GameEngine import GameState, Move
 from gameAI import findBestMove, findRandomMove
 
 
-
+# Print the board to help visualise
+# Not part of end product
 def drawBoard(board):
     # Function that prints out the current boardstate
     for row in board:
         print('{}'.format(row))
 
-
+# Main to test that everything works, includes a way for a human to play against the  AI
+# Not part of end product
 def main():
-
+    # Create an object of the class GameState
     gs = GameState()
+    # A list of all possible moves on the board
     possibleMoves = gs.getAllPossibleMoves()
     running = True
     moveMade = False
 
     playerOne = True #if a human is playing True, if AI playing false
     playerTwo = False # if a human is playing True, if AI playing false
-
+    
+    # Loop for every turn, switches between a human and the AI
     while running and (not gs.win):
         humanTurn = (gs.whiteToMove and playerOne) or (not gs.whiteToMove and playerTwo)
         drawBoard(gs.board)
-
+        
+        
+        # Asks for a human player to make a move
         if humanTurn:
 
             sq1 = input('Select square to move from: ') #input square you want to move from int,int
