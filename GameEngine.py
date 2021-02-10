@@ -53,7 +53,9 @@ class GameState():
         if (move.pieceMoved[1] == 'K') and ((move.endRow,move.endCol) in corners):
             self.win = True
 
-    # 
+    # Checks if a given piece can capture if it is moved to a place on the board. 
+    # If the conditions to caputre a pawn is fulfilled the pawn that is captured is added to pieceCaptured_cord and removed from the board.
+    # If the conditions to capture the king is fullfilled the king is removed and the black player wins.
     def updateCapture(self,row,col,move):
         directions = ((-1, 0), (0, -1), (1, 0), (0, 1))  # directions up, left, down, right
         corners = [(0,0),(0,1),(1,0),(1,1),(0,17),(0,18),(1,17),(1,18),(17,0),(17,1),(18,0),(18,1),(17,17),(17,18),(18,17),(18,18)]
@@ -128,7 +130,7 @@ class GameState():
 
             self.win = False
     
-    #
+    # Gets all possible moves for all pieces on a given board and returns them in a list "moves"
     def getAllPossibleMoves(self):
         moves = []
         for row in range(len(self.board)):
@@ -136,12 +138,13 @@ class GameState():
                 turn = self.board[row][col][0]
                 if (((turn == 'w') and self.whiteToMove) or ((turn == 'b') and (not self.whiteToMove))):
                     piece = self.board[row][col][1]
-                    self.moveFunctions[piece](row,col,moves)
+                    self.moveFunctions[piece](row,col,moves)  # ARE YOU SURE THIS WORKS AS INTENDED? For me "(row,col,moves)" is marked as unexpected arguments
 
         if len(moves) == 0:
             self.gameOver = True
         return moves
 
+    # Adds all valid moves of a given pawn to the list "moves"
     def getPawnMoves(self,row,col,moves):
         directions = ((-1,0),(0,-1),(1,0),(0,1)) # directions up, left, down, right
         for d in directions:
@@ -157,7 +160,7 @@ class GameState():
                 else: # we have gone off the board
                     break
 
-
+    # Adds all valid moves of a given king to the list "moves"
     def getKingMoves(self,row,col,moves):
         directions = ((-1, 0), (0, -1), (1, 0), (0, 1),(1,1),(1,-1),(-1,1),(-1,-1))  # directions up, left, down, right
         for d in directions:
