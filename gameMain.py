@@ -1,4 +1,5 @@
-# This is a test file to test that the AI works properly. It lets a human play against the AI.
+# This is a test file to test that the Eninge works properly. It lets a human play against the engine.
+# Run this file to test the engine. After inputing a move press Enter untill board gets printed again.
 # Not part of end product
 from GameEngine import GameState, Move
 from gameAI import findBestMove, findRandomMove
