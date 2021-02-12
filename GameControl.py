@@ -113,7 +113,7 @@ def main():
     #moveMade = False
 
     
-    # Loop for every turn, switches between a human and the AI
+    # Loop for every turn, switches between any two players
     while gs.win == False:
         drawBoard(gs.board)
         p = playerList[gc.playerNow]
