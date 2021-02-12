@@ -26,7 +26,7 @@ class GameControl():
         choose = [[True,True],[False,True],[True,False],[False,False]]
         if num == '1' :
             whiteOrBlack = input('Select which side white or black: ') #input 0:white 1:black
-            playerList[0].ai,playerList[1].ai = choose[1+whiteOrBlack]
+            playerList[0].ai,playerList[1].ai = choose[1+int(whiteOrBlack)]
         if num == '2' :
             playerList[0].ai,playerList[1].ai = choose[3]
         if num == '0':
