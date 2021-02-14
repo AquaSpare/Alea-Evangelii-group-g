@@ -1,10 +1,11 @@
-
 from gameAI import findBestMove, findRandomMove
 
 
-def computerMove(gs,difficulty,turn):
+#function that takes a gamestate and excecute the move on the board of the gamestate, given a difficulty.
+#Inputs: gs (game state object), difficulty ('easy' or 'hard'), turn (integer turn counter)
+#Output: updated turn counter if move is made.
 
-    print(difficulty)
+def computerMove(gs,difficulty,turn):
 
     possibleMoves = gs.getAllPossibleMoves()
     if (difficulty == 'easy'):

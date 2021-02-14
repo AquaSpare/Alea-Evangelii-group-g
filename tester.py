@@ -6,5 +6,5 @@ turn = 0;
 gs = GameState()
 drawBoard(gs.board)
 
-turn = computerMove(gs,'hard',turn)
+turn = computerMove(gs,'easy',turn)
 drawBoard(gs.board)

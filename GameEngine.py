@@ -1,5 +1,8 @@
+#game state object
 
 class GameState():
+
+    #constructor of GameState object if no parameters as given input
     def __init__(self):
         # Board is a 19*19 2D list each elemet has 2 characters.
         # The first character represent color "b" or "w".
