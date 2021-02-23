@@ -11,6 +11,7 @@ def findRandomMove(possibleMoves):
 
 # Returns one of the possible moves, chooses the move with highest score
 # Looks though every move and give them a score, keep the move with the highest score
+
 def findBestMove(gs,possibleMoves):
     turnMultiplyer = 1 if gs.whiteToMove else -1
 

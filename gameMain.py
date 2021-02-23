@@ -21,7 +21,7 @@ def main():
     moveMade = False
 
     playerOne = True #if a human is playing True, if AI playing false
-    playerTwo = False # if a human is playing True, if AI playing false
+    playerTwo = True # if a human is playing True, if AI playing false
     
     # Loop for every turn, switches between a human and the AI
     while running and (not gs.win):
@@ -68,6 +68,7 @@ def main():
 
                 if gs.win:
                     print('End of game')
+                    break
 
         input()
         drawBoard(gs.board)
