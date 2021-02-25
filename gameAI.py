@@ -1,11 +1,31 @@
-# The AI, can choose between getting a random move or the "best" move
 import random
 
-# Give a bias to the king
-pieceScore = {'K': 100, 'p': 5}
-GAMEOVER = 1000
 DEPTH = 2
 
+'''
+computerMove ----> The function that the user is going to call.
+
+Input: GameState object and difficulty level. 
+
+    Easy will return a random move.
+    
+    Hard will return a move computed using minmax algorithm that looks at DEPTH moves ahead, set to 2 (you can change
+    this if you want, but it impacts the performance draftily)
+    
+Output: A move object
+
+Raises exception if invalid difficulty is given
+
+'''
+def computerMove(gs,difficulty):
+    possibleMoves = gs.getAllPossibleMoves()
+
+    if difficulty == 'easy':
+        return findRandomMove(possibleMoves)
+    elif difficulty == 'hard':
+        return findBestMoveMinMax(gs,possibleMoves)
+    else:
+        raise InvalidDifficulty(difficulty)
 
 # Returns one of the possible moves, chosen at random
 def findRandomMove(possibleMoves):
@@ -120,12 +140,16 @@ def findMoveNegaMaxAlphaBeta(gs, possibleMoves, depth, alpha, beta, turnMultiply
             if depth == DEPTH:
                 nextMove = move
         gs.undoMove()
-        if maxScore > alpha:  # pruning happend
+        if maxScore > alpha:  # pruning happened
             alpha = maxScore
         if alpha >= beta:
             break
     return maxScore
 
+
+# Give a bias to the king
+pieceScore = {'K': 100, 'p': 5}
+GAMEOVER = 1000
 
 # a positive score is good for white, a negative score is good for black
 def scoreBoard(gs):
@@ -155,3 +179,10 @@ def scoreMaterial(board):
             if square[0] == 'w':
                 score += pieceScore[square[1]]
     return score
+
+
+class InvalidDifficulty(Exception):
+    def __init__(self,difficulty,message = 'Valid diffuculties are easy and hard'):
+        self.difficulty = difficulty
+        self.message = message
+        super().__init__(self.message)

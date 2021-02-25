@@ -5,8 +5,9 @@ class GameState():
         # The first character represent color "b" or "w".
         # The second character represent the type of pice "K" or "p".
 
-        # This board is to test that everything works
-        # Not part of end product
+        # This board is set to the initial board, and has been used in testing. Kept as a reference on how we store the
+        # board.
+
         self.board = [
             ["--", "--", "bp", "--", "--", "bp", "--", "--", "--", "--", "--", "--", "--", "bp", "--", "--", "bp", "--",
              "--"],
@@ -48,7 +49,7 @@ class GameState():
              "--"],
         ]
 
-        # Properties of the board
+        # Properties of the GameState
         self.moveFunctions = {'p': self.getPawnMoves, 'K': self.getKingMoves}
         self.movelog = []
         self.whiteToMove = True
@@ -76,9 +77,9 @@ class GameState():
     def updateCapture(self, row, col, move):
         directions = ((-1, 0), (0, -1), (1, 0), (0, 1))  # directions up, left, down, right
         corners = [(0, 0), (0, 1), (1, 0), (1, 1), (0, 17), (0, 18), (1, 17), (1, 18), (17, 0), (17, 1), (18, 0),
-                   (18, 1), (17, 17), (17, 18), (18, 17), (18, 18), (9, 9)]  # inlcudes middle square
+                   (18, 1), (17, 17), (17, 18), (18, 17), (18, 18), (9, 9)]
 
-        # possible combinations of pawn capture neigbourhood
+        # possible combinations of pawn capture neighbourhood
         cap1 = ['b', 'w', 'b']
         cap2 = ['w', 'b', 'w']
         cap3 = ['w', 'b', 'corner']
@@ -202,7 +203,7 @@ class GameState():
                     break
 
 
-# Class used to define movment
+# Class used to define a move
 class Move():
     def __init__(self, startSq, endSq, board):
         self.startRow = startSq[0]

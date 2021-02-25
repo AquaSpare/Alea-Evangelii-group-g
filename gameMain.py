@@ -2,7 +2,7 @@
 # Run this file to test the engine. After inputing a move press Enter untill board gets printed again.
 # Not part of end product
 from GameEngine import GameState, Move
-from gameAI import findBestMove, findRandomMove, findBestMoveMinMax, findMoveNegaMax
+from gameAI import computerMove
 
 
 # Print the board to help visualise
@@ -20,9 +20,11 @@ def main():
     running = True
     moveMade = False
 
-    playerOne = False #if a human is playing True, if AI playing false
+    playerOne = True #if a human is playing True, if AI playing false
     playerTwo = False
     # if a human is playing True, if AI playing false
+
+    difficulty = input('Input diffictulty: ')
     
     # Loop for every turn, switches between a human and the AI
     while running:
@@ -56,7 +58,7 @@ def main():
 
         #AI move finder
         if not humanTurn:
-            AIMove = findBestMoveMinMax(gs,possibleMoves)
+            AIMove = computerMove(gs, difficulty)
             print(AIMove)
 
             gs.makeMove(AIMove)
