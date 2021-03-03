@@ -12,6 +12,7 @@ from itertools import zip_longest
 import string
 import re
 from GameEngine import GameState
+from gameAI import computerMove
 
 # ---- Classes ---------------------------------------------
 class Mode(Enum):
@@ -169,9 +170,6 @@ def parseBoard(board,player):
 
   if player == Player.BLACK:
     gs.whiteToMove = False
-    print('BBC')
-  elif player == Player.WHITE:
-    print('WBC')
 
   i = 0
   j = 0
@@ -206,6 +204,7 @@ def playGame(startParams):
     player = nextPlayer(player)
     printBoard(board, player, captured)
     gs = parseBoard(board,player)
+    move = computerMove(gs,'hard')
     
     if(not isDeadlock(board, player, captured)):
       move = getMove(board, player, mode)

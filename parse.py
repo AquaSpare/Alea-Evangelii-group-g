@@ -1,7 +1,7 @@
 '''
 Function that takes the board and create an equivalent GameState object.
 
-Paste this function somwhere in game.py.
+Paste this function somwhere in game.py
 
 Be sure to import GameState inside game.py
 '''
@@ -12,9 +12,6 @@ def parseBoard(board,player):
 
   if player == Player.BLACK:
     gs.whiteToMove = False
-    print('BBC')
-  elif player == Player.WHITE:
-    print('WBC')
 
   i = 0
   j = 0
