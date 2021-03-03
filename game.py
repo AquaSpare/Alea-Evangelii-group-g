@@ -11,6 +11,7 @@ from enum import Enum
 from itertools import zip_longest
 import string
 import re
+from GameEngine import GameState
 
 # ---- Classes ---------------------------------------------
 class Mode(Enum):
@@ -162,6 +163,34 @@ class Position:
     return (self.r, self.c) in MARKED_POSITIONS and (self.r, self.c) != MIDDLE_POSITION
 
 
+# ---- Integration ---------------------------------------
+def parseBoard(board,player):
+  gs = GameState()
+
+  if player == Player.BLACK:
+    gs.whiteToMove = False
+    print('BBC')
+  elif player == Player.WHITE:
+    print('WBC')
+
+  i = 0
+  j = 0
+  for row in board:
+    j = 0
+    for element in row:
+      if element == Piece.PAWN:
+        gs.board[i][j] = 'wp'
+      elif element == Piece.KING:
+        gs.board[i][j] = 'wK'
+      elif element == Piece.WOLF:
+        gs.board[i][j] = 'bp'
+      else:
+        gs.board[i][j] = '--'
+      j+=1
+    i+=1
+
+  return gs
+
 # ---- Functionality ---------------------------------------
 
 def playGame(startParams):
@@ -175,7 +204,8 @@ def playGame(startParams):
 
   while not hasWon:
     player = nextPlayer(player)
-    printBoard(board, player, captured) 
+    printBoard(board, player, captured)
+    gs = parseBoard(board,player)
     
     if(not isDeadlock(board, player, captured)):
       move = getMove(board, player, mode)
