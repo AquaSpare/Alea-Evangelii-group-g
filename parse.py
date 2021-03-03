@@ -1,3 +1,12 @@
+'''
+Function that takes the board and create an equivalent GameState object.
+
+Paste this function somwhere in game.py.
+
+Be sure to import GameState inside game.py
+'''
+
+
 def parseBoard(board,player):
   gs = GameState()
 
