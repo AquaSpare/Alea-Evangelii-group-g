@@ -205,6 +205,14 @@ class GameState():
 
 # Class used to define a move
 class Move():
+
+    filesToRows = {"S":18,"R":17,"Q":16,"P":15,"O":14,"N":13,"M":12,"L":11,"K":10,"J":9,"I":8,"H":7,"G":6,"F":5,"E":4,"D":3,"C":2,"B":1,"A":0}
+    rowsToFiles = {v: k for k,v in filesToRows.items()}
+
+    rankToCols = {"1":0,"2":1,"3":2,"4":3,"5":4,"6":5,"7":6,"8":7,"9":8,"10":9,"11":10,"12":11,"13":12,"14":13,"15":14,"16":15,"17":16,"18":17,"19":18}
+    colsToRank = {v: k for k,v in rankToCols.items()}
+
+
     def __init__(self, startSq, endSq, board):
         self.startRow = startSq[0]
         self.startCol = startSq[1]
@@ -219,7 +227,7 @@ class Move():
         self.pieceCaptured_cord = None
 
     def __str__(self):
-        return '({},{}) -> ({},{})'.format(self.startRow, self.startCol, self.endRow, self.endCol)
+        return '({}) -> ({})'.format(self.getNotation()[0],self.getNotation()[1])
 
     def __eq__(self, other):  # override equals method
         if isinstance(other, Move):
@@ -227,3 +235,9 @@ class Move():
 
         # need to find what pice is being captured for a moce
         # self.piceCaptured =
+
+    def getNotation(self):
+        return (self.getRankFile(self.startRow,self.startCol),self.getRankFile(self.endRow,self.endCol))
+
+    def getRankFile(self,r,c):
+        return self.rowsToFiles[r] + self.colsToRank[c]

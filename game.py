@@ -14,6 +14,7 @@ import re
 from GameEngine import GameState
 from gameAI import computerMove
 
+
 # ---- Classes ---------------------------------------------
 class Mode(Enum):
   HUMANW_VS_AIB = "Human(White) vs AI(Black)"
@@ -260,7 +261,13 @@ def getInput(board, player):
 #DUMMY FUNCTION, REPLACE WITH MOVE FROM ACTUAL AI
 def getInputFromAI(board, player):
   print("Getting input from AI, test")
-  return getInput(board, player)
+
+  gs = parseBoard(board,player)
+  move = computerMove(gs,'hard')
+
+  print(move)
+
+  return move.getNotation()
 
 def getMove(board, player, mode):
   """Gets and validates a move input by a player OR ai.
@@ -285,12 +292,17 @@ def getMove(board, player, mode):
       move = getInput(board, player)
     
     positionStart, positionEnd = move
+
+    print(positionStart)
+    print(positionEnd)
+
     return (parseMove(positionStart), parseMove(positionEnd))
 
   else:
     move = getInputFromAI(board, player)
     
     while(not isValidMove(board, player, move)):
+      print('here again')
       move = getInputFromAI(board, player)
     
     positionStart, positionEnd = move

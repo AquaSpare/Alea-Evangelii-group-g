@@ -42,6 +42,7 @@ def main():
 
             if startSq != endSq:
                 move = Move(startSq,endSq,gs.board)
+                print(move)
                 if move in possibleMoves:
                     gs.makeMove(move)
                     moveMade = True
