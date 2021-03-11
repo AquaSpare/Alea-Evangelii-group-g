@@ -195,7 +195,7 @@ def parseBoard(board,player):
 def playGame(startParams):
   """Play a game of Alea Evangelii.
   """
-  mode, playerOne, playerTwo = startParams
+  mode, playerOne, playerTwo, diff = startParams
   board = INITIAL_BOARD
   player = playerOne
   captured = {playerOne: 0, playerTwo: 0}
@@ -204,11 +204,9 @@ def playGame(startParams):
   while not hasWon:
     player = nextPlayer(player)
     printBoard(board, player, captured)
-    gs = parseBoard(board,player)
-    move = computerMove(gs,'hard')
     
     if(not isDeadlock(board, player, captured)):
-      move = getMove(board, player, mode)
+      move = getMove(board, player, mode, diff)
       toPos = move[1]
       movedPiece = movePiece(board, move)
       capturedPieces = capturePieces(board, player, movedPiece, toPos)
@@ -259,17 +257,16 @@ def getInput(board, player):
   return move
 
 #DUMMY FUNCTION, REPLACE WITH MOVE FROM ACTUAL AI
-def getInputFromAI(board, player):
-  print("Getting input from AI, test")
+def getInputFromAI(board, player, diff):
 
   gs = parseBoard(board,player)
-  move = computerMove(gs,'hard')
+  move = computerMove(gs,diff)
 
   print(move)
 
   return move.getNotation()
 
-def getMove(board, player, mode):
+def getMove(board, player, mode, diff):
   """Gets and validates a move input by a player OR ai.
 
   Gets a move (as in a start position and an end position on the board), and
@@ -299,11 +296,11 @@ def getMove(board, player, mode):
     return (parseMove(positionStart), parseMove(positionEnd))
 
   else:
-    move = getInputFromAI(board, player)
+    move = getInputFromAI(board, player,diff)
     
     while(not isValidMove(board, player, move)):
       print('here again')
-      move = getInputFromAI(board, player)
+      move = getInputFromAI(board, player,diff)
     
     positionStart, positionEnd = move
     return (parseMove(positionStart), parseMove(positionEnd))
@@ -849,5 +846,5 @@ of the marked corner squares.\n\
 """Help text printed alongside the board."""
 
 if __name__ == "__main__":
-  startParams = (Mode.HUMANB_VS_AIW, Player.WHITE, Player.BLACK)
+  startParams = (Mode.HUMANW_VS_AIB, Player.WHITE, Player.BLACK,'hard')
   playGame(startParams)
