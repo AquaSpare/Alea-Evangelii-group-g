@@ -902,8 +902,16 @@ def display_menu(choice_map: Dict[str, Callable[[], None]], text):
 
 def start_game_against_ai():
     print("Start game against AI!")
-    startParams = (Mode.HUMANW_VS_AIB, Player.WHITE, Player.BLACK,'hard')
-    playGame(startParams)
+    #startParams = (Mode.HUMANW_VS_AIB, Player.WHITE, Player.BLACK,'hard')
+    #playGame(startParams)
+    level = input("Enter hard or easy level for AI: ")
+    while True:
+        if level == "easy" or level == "hard":
+            startParams = (Mode.HUMANW_VS_AIB, Player.WHITE, Player.BLACK,level)
+            playGame(startParams)
+            break
+        else:
+            level = input("Enter hard or easy level for AI: ")
 
 
 def start_game():
