@@ -998,8 +998,8 @@ def manage_tournament():
 
         except ValueError:
             succeeds = False
-        players = input_player_info(num_players)
-        display_schedule(save_schedule(players))
+    players = input_player_info(num_players)
+    display_schedule(save_schedule(players))
 
     with open("schedule.txt", "r") as schedule:
         schedule = schedule.readlines()
